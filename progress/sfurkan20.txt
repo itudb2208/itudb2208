@@ -1,0 +1,1 @@
+[06/11/2022] I initialized the Flask project by writing the database connection script, dynamic blueprint importing and the first template as a sample which is index.html. Rest of the project will be built upon these. I also converted our dataset into an SQLite database, which is located at /instance/db/db.sqlite.
