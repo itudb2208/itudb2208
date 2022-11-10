@@ -1,1 +1,1 @@
-
+[10/11/2022] I have found a bootstrap template focused on search functionality and added it to project.
