@@ -1,0 +1,1 @@
+[23/11/2022] I added navigation bar and footer components to ui design and adapted the bootstrap template to our hockey project like pages, background images ext. 
