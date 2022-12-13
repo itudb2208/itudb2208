@@ -3,9 +3,8 @@ from flask import (
 )
 from project.db import get_db
 
-bp = Blueprint('home', __name__, url_prefix='/')
+bp = Blueprint('about', __name__, url_prefix='/about')
 
 @bp.route('', methods=['GET'])
-def index():
-    return render_template('index.html')
-
+def about():
+    return render_template('about.html')
