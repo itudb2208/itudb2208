@@ -3,7 +3,7 @@ import importlib
 from flask import Flask
 from . import db
 
-BLUEPRINT_NAMES = ['home']  # Names of the blueprints (sub-applications) that will be registered by the main application
+BLUEPRINT_NAMES = ['home','about']  # Names of the blueprints (sub-applications) that will be registered by the main application
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
