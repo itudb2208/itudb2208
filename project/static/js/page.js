@@ -11,7 +11,7 @@ function choicePage(page) {
             title.innerHTML = "SEARCH PLAYER";
             break;
         case "coaches":
-            background.style.background = "url(../static/search_img.png)"
+            background.style.background = "url(../static/coach.jpg)"
             title.innerHTML = "SEARCH COACH";
             break;
         default:
