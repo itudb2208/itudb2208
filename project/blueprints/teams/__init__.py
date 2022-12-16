@@ -3,9 +3,10 @@ from flask import (
 )
 from project.db import get_db
 
-bp = Blueprint('teams', __name__, url_prefix='/teams')
+bp = Blueprint('teams', __name__, url_prefix='/')
 
 @bp.route('', methods=['GET'])
+@bp.route('/teams/', methods=['GET'])
 def index():
     return render_template('teams.html')
 
