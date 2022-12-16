@@ -1,39 +1,136 @@
 {% extends "_base.html" %}
-  
+
 {% block content %}
-    <div class="s002" style="background:url('{{url_for('static',filename='player.jpg')}}')">
-      <form action="" method="POST">
-        <fieldset>
-          <legend>SEARCH PLAYER</legend>
-        </fieldset>
-        <div class="inner-form">
-          <div class="input-field first-wrap">
-            <div class="icon-wrap">
+<div class="s002" style="background:url('{{url_for('static',filename='player.jpg')}}')">
+  <form action="{{ url_for('query.search') }}" method="POST">
+    <fieldset>
+      <legend>SEARCH PLAYER</legend>
+    </fieldset>
+    <div class="inner-form">
+      <div class="input-field first-wrap">
+        <div class="icon-wrap">
+        </div>
+        <input id="search" name="firstName" type="text" placeholder="First Name">
+        <input id="search" class="mt-2" name="lastName" type="text" placeholder="Last Name">
+        <input id="search_mode_input" name="search_mode" type="hidden" value="Players">
+        <div class="container pt-3 w-25">
+          <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">
+            <i class="bi bi-gear-fill"></i> Advanced Search
+          </button>
+        </div>
+        <div class="container w-50">
+          <div class="row">
+            <div id="filter-panel" class="collapse filter-panel">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="form-group">
+                    <input type="text" class="form-control mt-3" id="nick" name="nameNick" placeholder="Nick">
+                  </div>
+                  <div class="form-group">
+                    <select id='country-dropdown' class="mt-3" name="birthCountry">
+                      <option value="" disabled selected hidden>Birth Country</option>
+                      <option value="Australia">Australia</option>
+                      <option value="Austria">Austria</option>
+                      <option value="Belarus">Belarus</option>
+                      <option value="Belgium">Belgium</option>
+                      <option value="Brazil">Brazil</option>
+                      <option value="British West Indies">British West Indies</option>
+                      <option value="Brunei Darussalam">Brunei Darussalam</option>
+                      <option value="Canada">Canada</option>
+                      <option value="Croatia">Croatia</option>
+                      <option value="Czech Republic">Czech Republic</option>
+                      <option value="Denmark">Denmark</option>
+                      <option value="England">England</option>
+                      <option value="Finland">Finland</option>
+                      <option value="France">France</option>
+                      <option value="Germany">Germany</option>
+                      <option value="Haiti">Haiti</option>
+                      <option value="Indonesia">Indonesia</option>
+                      <option value="Ireland">Ireland</option>
+                      <option value="Italy">Italy</option>
+                      <option value="Jamaica">Jamaica</option>
+                      <option value="Japan">Japan</option>
+                      <option value="Kazakhstan">Kazakhstan</option>
+                      <option value="Korea">Korea</option>
+                      <option value="Latvia">Latvia</option>
+                      <option value="Lebanon">Lebanon</option>
+                      <option value="Lithuania">Lithuania</option>
+                      <option value="Netherlands">Netherlands</option>
+                      <option value="Nigeria">Nigeria</option>
+                      <option value="Northern Ireland">Northern Ireland</option>
+                      <option value="Norway">Norway</option>
+                      <option value="Paraguay">Paraguay</option>
+                      <option value="Poland">Poland</option>
+                      <option value="Russia">Russia</option>
+                      <option value="Scotland">Scotland</option>
+                      <option value="Slovakia">Slovakia</option>
+                      <option value="Slovenia">Slovenia</option>
+                      <option value="South Africa">South Africa</option>
+                      <option value="South Korea">South Korea</option>
+                      <option value="South Wales">South Wales</option>
+                      <option value="Sweden">Sweden</option>
+                      <option value="Switzerland">Switzerland</option>
+                      <option value="Taiwan">Taiwan</option>
+                      <option value="Tanzania">Tanzania</option>
+                      <option value="USA">USA</option>
+                      <option value="USSR">USSR</option>
+                      <option value="Ukraine">Ukraine</option>
+                      <option value="Venezuela">Venezuela</option>
+                      <option value="Wales">Wales</option>
+                      <option value="Yugoslavia">Yugoslavia</option>
+                    </select>
+                    <select id='date-dropdown' class="mt-3" name="birthYear">
+                      <option value="" disabled selected hidden>Birth Year</option>
+                    </select>
+                    <select id='pos-dropdown' class="mt-3" name="pos">
+                      <option value="" disabled selected hidden>Position</option>
+                      <option value="C">C</option>
+                      <option value="C/D">C/D</option>
+                      <option value="C/L">C/L</option>
+                      <option value="C/R">C/R</option>
+                      <option value="D">D</option>
+                      <option value="D/C">D/C</option>
+                      <option value="D/L">D/L</option>
+                      <option value="D/R">D/R</option>
+                      <option value="F">F</option>
+                      <option value="G">G</option>
+                      <option value="L">L</option>
+                      <option value="L/C">L/C</option>
+                      <option value="L/D">L/D</option>
+                      <option value="R">R</option>
+                      <option value="R/C">R/C</option>
+                      <option value="R/D">R/D</option>
+                      <option value="R/L">R/L</option>
+                      <option value="W">W</option>
+                    </select>
+                  </div>
+
+                </div>
+              </div>
             </div>
-            <input id="search" name="search_text" type="text" placeholder="What are you looking for?">
-          </div>
-          <div class="input-field fifth-wrap">
-            <button class="btn-search" type="submit">SEARCH</button>
           </div>
         </div>
-      </form>
-    </div>
- {% endblock %}
+      </div>
+      <div class="input-field fifth-wrap">
+        <button class="btn-search" type="submit">SEARCH</button>
+      </div>
+  </form>
 
- {% block scripts %}
-    <script type="text/javascript" src="{{url_for('static',filename='js/page.js')}}"></script>
-    
-    <script src="{{url_for('static',filename='js/extention/choices.js')}}"></script>
-    <script src="{{url_for('static',filename='js/extention/flatpickr.js')}}"></script>
-    <script>
-      flatpickr(".datepicker",
-      {});
-    </script>
-    <script>
-      const choices = new Choices('[data-trigger]',
-      {
-        searchEnabled: false,
-        itemSelectText: '',
-      });
-    </script>
- {% endblock %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  let dateDropdown = document.getElementById('date-dropdown');
+
+  let currentYear = 1993;
+  let earliestYear = 1841;
+  while (currentYear >= earliestYear) {
+    let dateOption = document.createElement('option');
+    dateOption.text = currentYear;
+    dateOption.value = currentYear;
+    dateDropdown.add(dateOption);
+    currentYear -= 1;
+  }
+</script>
+{% endblock %}
