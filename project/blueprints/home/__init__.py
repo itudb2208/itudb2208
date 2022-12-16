@@ -3,7 +3,7 @@ from flask import (
 )
 from project.db import get_db
 
-bp = Blueprint('home', __name__, url_prefix='/teams')
+bp = Blueprint('home', __name__, url_prefix='/')
 
 @bp.route('', methods=['GET'])
 def index():
