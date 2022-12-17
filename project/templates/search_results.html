@@ -16,7 +16,7 @@
             <tr>
                 <th scope="row">{{ loop.index }}</th>
 				{% for header in headers %}
-					<td><a class="nav-link" href="/search/{{row[table_id]}}">{{ row[header] }}</a></td>
+					<td><a class="nav-link" href="/search/{{table_id}}/{{row[table_id]}}">{{ row[header] }}</a></td>
 				{% endfor %}
             </tr>
             {% endfor %}
