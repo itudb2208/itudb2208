@@ -6,6 +6,7 @@ from project.db import get_db
 
 NON_EXACT_COLUMNS = set(["firstName", "lastName", "nameNick", "name"])
 TABLE_NAMES = {"Teams": "Teams", "Players": "Master", "Coaches": "Master"}
+TABLE_IDS = {"Teams": "tmID", "Players": "playerID", "Coaches": "coachID"}
 HEADERS_FOR_TABLES = {"Master": ["firstName", "lastName", "nameNick", "pos"],
                       "Teams": ["name"]}
 
@@ -19,9 +20,12 @@ def search():
     
     search_attributes = {key: ([value], key not in NON_EXACT_COLUMNS, True) for key, value in request.form.items() if value != ""}
     
+    table_id = TABLE_IDS.get(search_mode, None)
     table_name = TABLE_NAMES.get(search_mode, None)
     if not table_name:
         return render_template('index.html')
+    
+    HEADERS_FOR_TABLES[table_name].append(table_id)
            
     group_by_columns = None
     if table_name == "Teams":
@@ -33,7 +37,9 @@ def search():
             search_attributes["coachID"] = ([''], True, False)
     rows = db_filter(table_name, search_attributes, select_columns=HEADERS_FOR_TABLES[table_name], group_by_columns=group_by_columns)
     
-    return render_template('search_results.html', headers=HEADERS_FOR_TABLES[table_name], results=rows)
+    
+
+    return render_template('search_results.html', headers=HEADERS_FOR_TABLES[table_name], results=rows,table_id=table_id)
     
 def db_filter(table_name, attributes, select_columns=["*"], group_by_columns=None):
     """
