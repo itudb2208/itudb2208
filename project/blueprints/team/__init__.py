@@ -9,7 +9,11 @@ bp = Blueprint('team', __name__, url_prefix='/search/tmID')
 def index(tmID):
     with get_db() as connection:
         cursor = connection.cursor()
-        cursor.execute(f"""SELECT name FROM Teams WHERE (tmID="{tmID}") GROUP BY name""")
+        cursor.execute(f"""SELECT name,lgID,franchID FROM Teams  WHERE (tmID="{tmID}") GROUP BY name,lgID,franchID""")
         general = cursor.fetchall()
-    return render_template('team.html',headers=["name","lgID","confID","divID"],general=general)
+        cursor.execute(f"""SELECT year as Season, rank as Ranking,Fullname as Playoff_Degree,G as Games_Played,W as Win,L as Loose,T as Tie,Pts as Points,GF as Goals_For,GA as Goals_Against FROM Teams LEFT JOIN abbrev ON (playoff=Code) WHERE (tmID="{tmID}") GROUP BY name,franchID,lgID,year""")
+        regular_stats = cursor.fetchall()
+        cursor.execute(f"""SELECT year,G,W,L,T,GF,GA FROM TeamsPost WHERE (tmID="{tmID}") GROUP BY name,lgID,year""")
+        post_stats = cursor.fetchall()
+    return render_template('team.html',general_headers=["name"],regular_headers=["name"],post_headers=["name"],general=general,regular=regular_stats,post=post_stats)
 
