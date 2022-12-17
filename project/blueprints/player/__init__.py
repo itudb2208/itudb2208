@@ -5,7 +5,7 @@ from project.db import get_db
 
 bp = Blueprint('player', __name__, url_prefix='/search/playerID')
 
-@bp.route('/<string:tmID>', methods=['GET'])
+@bp.route('/<string:playerID>', methods=['GET'])
 def index(playerID):
     with get_db() as connection:
         cursor = connection.cursor()
