@@ -4,7 +4,7 @@ from flask import Flask
 from flask_login import LoginManager, UserMixin,AnonymousUserMixin
 from . import db
 
-BLUEPRINT_NAMES = ['about','login','teams','players','coaches','query','player','coach','team']  # Names of the blueprints (sub-applications) that will be registered by the main application
+BLUEPRINT_NAMES = ['about','login','teams','players','coaches','query','player','coach','team','home']  # Names of the blueprints (sub-applications) that will be registered by the main application
 
 # user class for login
 class User(UserMixin):

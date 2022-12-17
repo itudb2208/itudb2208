@@ -3,9 +3,9 @@ from flask import (
 )
 from project.db import get_db
 
-bp = Blueprint('players', __name__, url_prefix='/players')
+bp = Blueprint('players', __name__, url_prefix='/')
 
-@bp.route('', methods=['GET'])
+@bp.route('/players', methods=['GET'])
 def index():
     return render_template('players.html')
 

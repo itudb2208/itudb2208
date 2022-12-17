@@ -269,6 +269,14 @@ footer{
   padding-bottom: 0.5rem!important;
 }
 
+.s002 form .input-field {
+  border-right: 0px!important;
+}
+
+.table-responsive {
+  margin-top: 65px;
+}
+
 /**
  * Remove the inner border and padding in Firefox.
  */
