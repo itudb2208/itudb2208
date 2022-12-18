@@ -9,7 +9,7 @@ bp = Blueprint('coach', __name__, url_prefix='/search/coachID')
 def index(coachID):
     with get_db() as connection:
         cursor = connection.cursor()
-        cursor.execute(f"""SELECT firstName,lastName,nameNick,height,weight,firstNHL,lastNHL,pos,birthYear,
+        cursor.execute(f"""SELECT firstName,lastName,nameNick,birthYear,
         birthMon,birthDay,birthCountry,birthCity,deathYear,deathMon,deathDay,deathCountry,deathCity
         FROM Master WHERE (coachID=?)""", (coachID,))
         general = cursor.fetchall()
@@ -19,9 +19,10 @@ def index(coachID):
         stats = cursor.fetchall()
         cursor.execute(f"""SELECT AwardsCoaches.year as Season,award as Award
         FROM Coaches JOIN AwardsCoaches ON (AwardsCoaches.year=Coaches.year)AND(AwardsCoaches.coachID=Coaches.coachID) WHERE (Coaches.coachID=?)""", (coachID,))
+        awardWinner = cursor.rowcount is not None
         awards = cursor.fetchall()
     
-    return render_template('coach.html',general_headers=["firstName","lastName","nameNick","height","weight","firstNHL","lastNHL","Position","birthYear","birthMon",
+    return render_template('coach.html',general_headers=["firstName","lastName","nameNick","birthYear","birthMon",
     "birthDay","birthCountry","birthCity","deathYear","deathMon","deathDay","deathCountry","deathCity"],
     stats_headers=["Season","League","Team","Games","Win","Loose","Tie","Playoff_Games","Playoff_Wins","Playoff_Loose","Playoff_Tie"],
-    awards_headers=["Season","Award"],general=general,stats=stats,awards=awards)
+    awards_headers=["Season","Award"],general=general,stats=stats,awards=awards,awardWinner=awardWinner)
