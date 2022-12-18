@@ -1,0 +1,50 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<div style="padding:100px;">
+
+    <form method="post" id="tableselect" action="/add/select">
+        <label for="tables" formid="tableselect"><b>Insert to:</b></label>
+        <select name="tables" id="tables">
+            <option value="Teams">Teams</option>
+            <option value="Players">Players</option>
+            <option value="Coaches">Coaches</option>
+        </select>
+        <input type="submit">
+    </form>
+
+    <div>
+        {% if table_name == "Teams" %}
+        <form name="Teams" id="Teams">
+            {% for attr,type in columns.items() %}
+                <label for="{{attr}}">{{attr}}:</label>
+                {% if attr == 'divID' %}
+                    <select id="{{attr}}" name="{{attr}}">
+                        {% for div_id in div_codes %}
+                            <option value="{{div_id}}">{{div_id}}</option>
+                        {% endfor %}
+                    </select>
+
+                {% elif attr == 'confID' %}
+                    <select id="{{attr}}" name="{{attr}}">
+                        {% for conf_id in conf_codes %}
+                            <option value="{{conf_id}}">{{conf_id}}</option>
+                        {% endfor %}
+                    </select>
+
+                {% elif type == 'TEXT' %}
+                    <input type="text" id="{{attr}}"><br>
+
+                {% elif type == 'INTEGER' %}
+                    <input type="numeric" id="{{attr}}"><br>
+                {% endif %}
+                <br>
+            {% endfor %}
+        </form>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}
