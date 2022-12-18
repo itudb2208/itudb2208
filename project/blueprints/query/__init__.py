@@ -37,7 +37,7 @@ def search():
             search_attributes["coachID"] = ([''], True, False)
     rows = db_filter(table_name, search_attributes, select_columns=HEADERS_FOR_TABLES[table_name], group_by_columns=group_by_columns)
     
-    
+    HEADERS_FOR_TABLES[table_name].pop()
 
     return render_template('search_results.html', headers=HEADERS_FOR_TABLES[table_name], results=rows,table_id=table_id)
     
