@@ -1,3 +1,4 @@
 [10/11/2022] I have found a bootstrap template focused on search functionality and added it to project.
 [13/12/2022] Added about page.
 [15/12/2022] Added login page and Users table to database.
+[18/12/2022] Added home page and navigation message, fixed footer position
