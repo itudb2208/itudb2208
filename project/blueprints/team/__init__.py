@@ -29,5 +29,6 @@ def update():
     tm_ID = update_dict.pop("tmID")
     with get_db() as connection:
         cursor = connection.cursor()
-        cursor.execute(f"""UPDATE Teams SET {','.join([f"{key}=?" for key in update_dict.keys()])} WHERE tmID=?""", (*update_dict.values(), tm_ID))
+        for table_names, table_updates in update_dict.items():
+            cursor.execute(f"""UPDATE {table_names} SET {','.join([f"{key}=?" for key in table_updates.keys()])} WHERE tmID=?""", (*table_updates.values(), tm_ID))
     return index(tm_ID)

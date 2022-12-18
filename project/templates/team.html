@@ -20,7 +20,7 @@
 							{% else %}
 								{% set inputValue = general[0][display_header] %}
 							{% endif %}
-							<input hidden value="{{ inputValue }}" name="{{ real_header }}" type="text">
+							<input hidden tablename="Teams" value="{{ inputValue }}" name="{{ real_header }}" type="text">
 							<a mode="normal" onclick="toggleEdit(this)" class="card-link"><i class="bi bi-pencil-square"></i></a>
 						{% endif %}
 					</td>
@@ -52,7 +52,7 @@
 							{% else %}
 								{% set inputValue = row[display_header] %}
 							{% endif %}
-							<input hidden value="{{ inputValue }}" name="{{ real_header }}" type="text">
+							<input hidden tablename="Teams" value="{{ inputValue }}" name="{{ real_header }}" type="text">
 							<a mode="normal" onclick="toggleEdit(this)" class="card-link"><i class="bi bi-pencil-square"></i></a>
 						{% endif %}
 					</td>
@@ -85,7 +85,7 @@
 							{% else %}
 								{% set inputValue = row[display_header] %}
 							{% endif %}
-							<input hidden value="{{ inputValue }}" name="{{ real_header }}" type="text">
+							<input hidden tablename="TeamsPost" value="{{ inputValue }}" name="{{ real_header }}" type="text">
 							<a mode="normal" onclick="toggleEdit(this)" class="card-link"><i class="bi bi-pencil-square"></i></a>
 						{% endif %}
 					</td>
