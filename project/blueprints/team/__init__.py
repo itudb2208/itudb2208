@@ -26,9 +26,19 @@ def index(tmID):
 @bp.route('/update', methods=['POST'])
 def update():
     update_dict = dict(request.json)
-    tm_ID = update_dict.pop("tmID")
+    team_ID = update_dict.pop("tmID")
+    
     with get_db() as connection:
         cursor = connection.cursor()
-        for table_names, table_updates in update_dict.items():
-            cursor.execute(f"""UPDATE {table_names} SET {','.join([f"{key}=?" for key in table_updates.keys()])} WHERE tmID=?""", (*table_updates.values(), tm_ID))
-    return index(tm_ID)
+        for table_name, table_updates in update_dict.items():
+            for idx, table_update in table_updates.items():
+                where_keys = table_update.pop("wherekeys", None)
+                where_values = table_update.pop("wherevalues", [])
+                where_clause = ""
+                if where_keys:
+                    where_keys = where_keys.split(' ')
+                    where_values = where_values.split('~')
+                    where_clause = f"AND {' AND '.join([key+'=?' for key in where_keys])}"
+
+                cursor.execute(f"""UPDATE {table_name} SET {','.join([f"{key}=?" for key in table_update.keys()])} WHERE tmID=? {where_clause}""", (*table_update.values(), team_ID, *where_values))
+    return index(team_ID)

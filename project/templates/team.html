@@ -11,16 +11,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr tablename="Teams">
 				{% for display_header, real_header in general_headers %}
 					<td> <p>{{ general[0][display_header] }}</p>
-						{% if True %}
+						{% if current_user.is_authenticated %}
 							{% if general[0][real_header] is defined %}
 								{% set inputValue = general[0][real_header] %}
 							{% else %}
 								{% set inputValue = general[0][display_header] %}
 							{% endif %}
-							<input hidden tablename="Teams" value="{{ inputValue }}" name="{{ real_header }}" type="text">
+							<input hidden value="{{ inputValue }}" name="{{ real_header }}" type="text">
 							<a mode="normal" onclick="toggleEdit(this)" class="card-link"><i class="bi bi-pencil-square"></i></a>
 						{% endif %}
 					</td>
@@ -42,17 +42,17 @@
         </thead>
         <tbody>
             {% for row in regular %}
-            <tr>
+            <tr rowindex="{{ loop.index }}" tablename="Teams" wherekeys="year" wherevalues="{{ row['Season'] }}">
                 <th scope="row">{{ loop.index }}</th>
 				{% for display_header, real_header in regular_headers %}
 					<td> <p>{{ row[display_header] }}</p>
-						{% if True %}
+						{% if current_user.is_authenticated %}
 							{% if row[real_header] is defined %}
 								{% set inputValue = row[real_header] %}
 							{% else %}
 								{% set inputValue = row[display_header] %}
 							{% endif %}
-							<input hidden tablename="Teams" value="{{ inputValue }}" name="{{ real_header }}" type="text">
+							<input hidden value="{{ inputValue }}" name="{{ real_header }}" type="text">
 							<a mode="normal" onclick="toggleEdit(this)" class="card-link"><i class="bi bi-pencil-square"></i></a>
 						{% endif %}
 					</td>
@@ -75,17 +75,17 @@
         </thead>
         <tbody>
             {% for row in post %}
-            <tr>
+            <tr rowindex="{{ loop.index }}" tablename="TeamsPost" wherekeys="year" wherevalues="{{ row['Season'] }}">
                 <th scope="row">{{ loop.index }}</th>
 				{% for display_header, real_header in post_headers %}
 					<td> <p>{{ row[display_header] }}</p>
-						{% if True %}
+						{% if current_user.is_authenticated %}
 							{% if row[real_header] is defined %}
 								{% set inputValue = row[real_header] %}
 							{% else %}
 								{% set inputValue = row[display_header] %}
 							{% endif %}
-							<input hidden tablename="TeamsPost" value="{{ inputValue }}" name="{{ real_header }}" type="text">
+							<input hidden value="{{ inputValue }}" name="{{ real_header }}" type="text">
 							<a mode="normal" onclick="toggleEdit(this)" class="card-link"><i class="bi bi-pencil-square"></i></a>
 						{% endif %}
 					</td>
@@ -96,7 +96,7 @@
     </table>
 </div>
 
-{% if True %}
+{% if current_user.is_authenticated %}
 <div class="d-flex justify-content-center">
 	<button type="button" onclick="save()" class="btn btn-warning">
 		<i class="bi bi-check-square-fill"></i> Save
@@ -116,7 +116,7 @@
 {% endblock %}
 
 {% block scripts %}
-	{% if True %}
+	{% if current_user.is_authenticated %}
 		<script type="text/javascript" src="{{url_for('static',filename='js/individual_pages.js')}}"></script>
 	{% endif %}
 {% endblock %}
