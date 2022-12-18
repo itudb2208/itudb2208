@@ -1,19 +1,29 @@
 {% extends "_base.html" %}
-  
 {% block content %}
+<p hidden id="entryID">{{ tmID }}</p>
 <div class="table-responsive">
     <table class="table table-sm table-borderless mb-0">
         <thead class="thead-dark">
             <tr>
-				{% for header in general_headers %}
-					<th>{{ header }}</th>
+				{% for display_header, real_header in general_headers %}
+					<th>{{ display_header }}</th>
 				{% endfor %}
             </tr>
         </thead>
         <tbody>
-            <tr>
-				{% for header in general_headers %}
-					<td>{{ general[0][header] }}</td>
+            <tr tablename="Teams">
+				{% for display_header, real_header in general_headers %}
+					<td> <p>{{ general[0][display_header] }}</p>
+						{% if current_user.is_authenticated %}
+							{% if general[0][real_header] is defined %}
+								{% set inputValue = general[0][real_header] %}
+							{% else %}
+								{% set inputValue = general[0][display_header] %}
+							{% endif %}
+							<input hidden value="{{ inputValue }}" name="{{ real_header }}" type="text">
+							<a mode="normal" onclick="toggleEdit(this)" class="card-link"><i class="bi bi-pencil-square"></i></a>
+						{% endif %}
+					</td>
 				{% endfor %}
             </tr>
         </tbody>
@@ -25,17 +35,27 @@
         <thead class="thead-dark">
             <tr>
 				<th>#</th>
-				{% for header in regular_headers %}
-					<th>{{ header }}</th>
+				{% for display_header, real_header in regular_headers %}
+					<th>{{ display_header }}</th>
 				{% endfor %}
             </tr>
         </thead>
         <tbody>
             {% for row in regular %}
-            <tr>
+            <tr rowindex="{{ loop.index }}" tablename="Teams" wherekeys="year" wherevalues="{{ row['Season'] }}">
                 <th scope="row">{{ loop.index }}</th>
-				{% for header in regular_headers %}
-					<td>{{ row[header] }}</td>
+				{% for display_header, real_header in regular_headers %}
+					<td> <p>{{ row[display_header] }}</p>
+						{% if current_user.is_authenticated %}
+							{% if row[real_header] is defined %}
+								{% set inputValue = row[real_header] %}
+							{% else %}
+								{% set inputValue = row[display_header] %}
+							{% endif %}
+							<input hidden value="{{ inputValue }}" name="{{ real_header }}" type="text">
+							<a mode="normal" onclick="toggleEdit(this)" class="card-link"><i class="bi bi-pencil-square"></i></a>
+						{% endif %}
+					</td>
 				{% endfor %}
             </tr>
             {% endfor %}
@@ -48,23 +68,41 @@
         <thead class="thead-dark">
             <tr>
 				<th>#</th>
-				{% for header in post_headers %}
-					<th>{{ header }}</th>
+				{% for display_header, real_header in post_headers %}
+					<th>{{ display_header }}</th>
 				{% endfor %}
             </tr>
         </thead>
         <tbody>
             {% for row in post %}
-            <tr>
+            <tr rowindex="{{ loop.index }}" tablename="TeamsPost" wherekeys="year" wherevalues="{{ row['Season'] }}">
                 <th scope="row">{{ loop.index }}</th>
-				{% for header in post_headers %}
-					<td>{{ row[header] }}</td>
+				{% for display_header, real_header in post_headers %}
+					<td> <p>{{ row[display_header] }}</p>
+						{% if current_user.is_authenticated %}
+							{% if row[real_header] is defined %}
+								{% set inputValue = row[real_header] %}
+							{% else %}
+								{% set inputValue = row[display_header] %}
+							{% endif %}
+							<input hidden value="{{ inputValue }}" name="{{ real_header }}" type="text">
+							<a mode="normal" onclick="toggleEdit(this)" class="card-link"><i class="bi bi-pencil-square"></i></a>
+						{% endif %}
+					</td>
 				{% endfor %}
             </tr>
             {% endfor %}
-        </tbody>
+		</tbody>
     </table>
 </div>
+
+{% if current_user.is_authenticated %}
+<div class="d-flex justify-content-center">
+	<button type="button" onclick="save()" class="btn btn-warning">
+		<i class="bi bi-check-square-fill"></i> Save
+	</button>
+</div>
+{% endif %}
 <section class="w-100 p-4 pb-4 d-flex justify-content-center align-items-center flex-column">
     <div>
         <form class="d-flex" style="margin-bottom: 150px!important;"> 
@@ -75,4 +113,10 @@
         </form>
     </div>
   </section>
+{% endblock %}
+
+{% block scripts %}
+	{% if current_user.is_authenticated %}
+		<script type="text/javascript" src="{{url_for('static',filename='js/individual_pages.js')}}"></script>
+	{% endif %}
 {% endblock %}
