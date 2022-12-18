@@ -1,28 +1,30 @@
 {% extends "_base.html" %}
 
 {% block content%}
-<header>
-    <div class="header-content">
-        <div class="header-content-inner">
-            <h1>Welcome to Hockey League!</h1>
-            <p>Search across wide range of hockey league data.</p>
-            <h3> Search for: </h3>
-        </div>
-        <div class="container" style="margin-top:50px;">
-            <div class="row align-items-center justify-content-center">
-                <div class="col align-self-center">
-                    <a class="btn btn-primary btn-lg" href="{{ url_for('teams.index') }}">Teams</a>
-                </div>
-                <div class="col align-self-center">
-                    <a class="btn btn-primary btn-lg" href="{{ url_for('players.index') }}">Players</a>
-                </div>
-                <div class="col align-self-center">
-                    <a class="btn btn-primary btn-lg" href="{{ url_for('coaches.index') }}">Coaches</a>
+<div class="s002" style="background-image:url('https://static.vecteezy.com/system/resources/previews/003/386/400/non_2x/ice-hockey-arena-background-concept-free-vector.jpg')">
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner" style="color: azure;">
+                <h1>Welcome to Hockey Trivia!</h1>
+                <p style="color: khaki;">Search across wide range of hockey league data.</p>
+                <h3> Search for: </h3>
+            </div>
+            <div class="container" style="margin-top:50px;">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col align-self-center">
+                        <a class="btn btn-primary btn-lg" href="{{ url_for('teams.index') }}">Teams</a>
+                    </div>
+                    <div class="col align-self-center">
+                        <a class="btn btn-primary btn-lg" href="{{ url_for('players.index') }}">Players</a>
+                    </div>
+                    <div class="col align-self-center">
+                        <a class="btn btn-primary btn-lg" href="{{ url_for('coaches.index') }}">Coaches</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
+</div>
 
 
 {% endblock%}

@@ -22,13 +22,16 @@
 				{% for header in headers %}
 					<td><a class="nav-link" href="/search/{{table_id}}/{{row[table_id]}}">{{ row[header] }}</a></td>
 				{% endfor %}
+                {% if current_user.is_authenticated %}
                 <td>
                     <input type="checkbox" name="ids" value="{{ row[table_id] }}" />
                 </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% if current_user.is_authenticated %}
     <input id="search_mode_input" name="which_table" type="hidden" value="{{table_id}}">
     <button type="submit" class="btn btn-secondary" style="float: right;margin-right: 50px;margin-top: 15px;">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -37,6 +40,7 @@
         </svg>
         Delete
     </button>
+    {% endif %}
     
 </div>
 </form>
