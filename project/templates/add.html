@@ -8,15 +8,17 @@
         <label for="tables" formid="tableselect"><b>Insert to:</b></label>
         <select name="tables" id="tables">
             <option value="Teams">Teams</option>
-            <option value="Players">Players</option>
-            <option value="Coaches">Coaches</option>
+
+            <option value="Master">Master</option>
         </select>
-        <input type="submit">
+        <button type="submit" class="btn btn-primary btn-sm"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Select</button>
     </form>
 
     <div>
-        {% if table_name == "Teams" %}
-        <form name="Teams" id="Teams">
+        {% if table_name == "Teams" or table_name == "Master" %}
+        <form name="{{table_name}}" id="{{table_name}}" method="post" action="/add">
+            <input type="hidden" id="table" name="table" value="{{table_name}}">
             {% for attr,type in columns.items() %}
                 <label for="{{attr}}">{{attr}}:</label>
                 {% if attr == 'divID' %}
@@ -24,6 +26,8 @@
                         {% for div_id in div_codes %}
                             <option value="{{div_id}}">{{div_id}}</option>
                         {% endfor %}
+
+                        <option value="" selected></option>
                     </select>
 
                 {% elif attr == 'confID' %}
@@ -31,16 +35,28 @@
                         {% for conf_id in conf_codes %}
                             <option value="{{conf_id}}">{{conf_id}}</option>
                         {% endfor %}
+
+                        <option value="" selected></option>
                     </select>
 
                 {% elif type == 'TEXT' %}
-                    <input type="text" id="{{attr}}"><br>
+                    {% if reqs[attr] %}
+                    <input type="text" id="{{attr}}" name="{{attr}}" required><br>
+                    {% else %}
+                    <input type="text" id="{{attr}}" name="{{attr}}"><br>
+                    {% endif %}
 
                 {% elif type == 'INTEGER' %}
-                    <input type="numeric" id="{{attr}}"><br>
+                    {% if reqs[attr] %}
+                    <input type="numeric" id="{{attr}}" name="{{attr}}" required><br>
+                    {% else %}
+                    <input type="numeric" id="{{attr}}" name="{{attr}}" ><br>
+                    {% endif %}
                 {% endif %}
                 <br>
             {% endfor %}
+            <button type="submit" class="btn btn-primary btn-md"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Add to {{table_name}}</button>
         </form>
         {% endif %}
     </div>
