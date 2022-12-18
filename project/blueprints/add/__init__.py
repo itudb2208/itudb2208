@@ -40,22 +40,32 @@ def add():
 
     return render_template('add.html')
 
-@bp.route('/select', methods=["POST"])
+@bp.route('/select', methods=["GET","POST"])
 def select():
+    if request.method == "GET":
+        return redirect(url_for("add.add"))
+
     table_name = request.form["tables"]
     print(table_name)
     
     with get_db() as connection:
         cursor = connection.cursor()
-        if(table_name == "Teams"):
+        div_codes = False
+        conf_codes = False
+
+        if table_name == "Teams":
             divs = cursor.execute(f"SELECT * FROM abbrev WHERE Type='Division';").fetchall()
             div_codes = [div["code"] for div in divs]
 
             confs = cursor.execute(f"SELECT * FROM abbrev WHERE Type='Conference';").fetchall()
             conf_codes = [conf["code"] for conf in confs]
 
+        elif table_name == "Master":
+            pass
+
         columns = dict([(row['name'],row['type']) for row in cursor.execute(f"PRAGMA table_info({table_name});").fetchall()])
         reqs = dict([(row['name'],row['notnull']) for row in cursor.execute(f"PRAGMA table_info({table_name});").fetchall()])
         print(columns)
         print(reqs)
     return render_template('add.html',columns=columns, table_name=table_name, div_codes=div_codes,conf_codes=conf_codes, reqs=reqs)
+
