@@ -42,7 +42,7 @@
           </ul>
           <ul class="navbar-nav">
             {% if current_user.is_authenticated %}
-                <p class="nav-link" style="padding-right:50px;">Welcome, {{current_user.name}}!</p>
+                <p class="nav-link" style="padding-right:50px;margin-bottom: 0px;">Welcome, {{current_user.name}}!</p>
             {% endif %}
             <li class="nav-item">
               {% if current_user.is_authenticated %}

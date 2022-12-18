@@ -35,10 +35,12 @@ def add():
                 print("Failed.")
             else:
                 print("Succesful.")
+
     else:
         return render_template('add.html')
 
     return render_template('add.html')
+
 
 @bp.route('/select', methods=["GET","POST"])
 def select():
@@ -54,11 +56,13 @@ def select():
         conf_codes = False
 
         if table_name == "Teams":
+
             divs = cursor.execute(f"SELECT * FROM abbrev WHERE Type='Division';").fetchall()
             div_codes = [div["code"] for div in divs]
 
             confs = cursor.execute(f"SELECT * FROM abbrev WHERE Type='Conference';").fetchall()
             conf_codes = [conf["code"] for conf in confs]
+
 
         elif table_name == "Master":
             pass
