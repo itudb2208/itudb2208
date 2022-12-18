@@ -7,9 +7,17 @@
     <form method="post" id="tableselect" action="/add/select">
         <label for="tables" formid="tableselect"><b>Insert to:</b></label>
         <select name="tables" id="tables">
-            <option value="Teams">Teams</option>
-
+            {% if table_name == "Teams"%}
+            <option value="Teams" selected>Teams</option>
             <option value="Master">Master</option>
+            {% elif table_name == "Master" %}
+            <option value="Teams">Teams</option>
+            <option value="Master" selected>Master</option>
+            {% else %}
+            <option value="Teams" >Teams</option>
+            <option value="Master">Master</option>
+            {% endif %}
+
         </select>
         <button type="submit" class="btn btn-primary btn-sm"
               style="padding-left: 2.5rem; padding-right: 2.5rem;">Select</button>
