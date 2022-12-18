@@ -31,7 +31,7 @@ def login():
             if username == user.name and password == user.password:
                 login_user(user)
                 flash("Logged in!")
-                return redirect(request.args.get("next") or url_for("teams.index"))
+                return redirect(request.args.get("next") or url_for("home.index"))
         flash("Could not log in.")
 
     else:
@@ -43,4 +43,4 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("teams.index"))
+    return redirect(url_for("home.index"))
