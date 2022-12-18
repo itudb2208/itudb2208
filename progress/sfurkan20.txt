@@ -1,2 +1,3 @@
 [06/11/2022] I initialized the Flask project by writing the database connection script, dynamic blueprint importing and the first template as a sample which is index.html. Rest of the project will be built upon these. I also converted our dataset into an SQLite database, which is located at /instance/db/db.sqlite.
 [16/12/2022] I added the front-end to make filtering, and created the blueprints for handling search requests.
+[18/12/2022] I added the mechanism for updating database entries for teams, players and coaches.
