@@ -9,11 +9,16 @@ bp = Blueprint('team', __name__, url_prefix='/search/tmID')
 def index(tmID):
     with get_db() as connection:
         cursor = connection.cursor()
-        cursor.execute(f"""SELECT name,lgID,franchID FROM Teams  WHERE (tmID="{tmID}") GROUP BY name""")
+        cursor.execute(f"""SELECT name as Name,lgID as League,franchID as Franchise FROM Teams  WHERE (tmID="{tmID}") GROUP BY name""")
         general = cursor.fetchall()
-        cursor.execute(f"""SELECT year as Season, rank as Ranking,Fullname as Playoff_Degree,G as Games_Played,W as Win,L as Loose,T as Tie,Pts as Points,GF as Goals_For,GA as Goals_Against FROM Teams LEFT JOIN abbrev ON (playoff=Code) WHERE (tmID="{tmID}") GROUP BY year""")
+        cursor.execute(f"""SELECT year as Season, rank as Ranking,Fullname as Playoff_Degree,
+        G as Games_Played,W as Win,L as Loose,T as Tie,Pts as Points,GF as Goals_For,GA as Goals_Against 
+        FROM Teams LEFT JOIN abbrev ON (playoff=Code) WHERE (tmID="{tmID}") GROUP BY year""")
         regular_stats = cursor.fetchall()
-        cursor.execute(f"""SELECT year,G,W,L,T,GF,GA FROM TeamsPost WHERE (tmID="{tmID}") GROUP BY year""")
+        cursor.execute(f"""SELECT year as Season,G as Games_Played,W as Win,L as Loose,T as Tie,GF as Goals_For,GA as Goals_Against FROM TeamsPost WHERE (tmID="{tmID}") GROUP BY year""")
         post_stats = cursor.fetchall()
-    return render_template('team.html',general_headers=["name"],regular_headers=["name"],post_headers=["name"],general=general,regular=regular_stats,post=post_stats)
+    return render_template('team.html',general_headers=["Name","League","Franchise"],
+    regular_headers=["Season","Ranking","Playoff_Degree","Games_Played","Win","Loose","Tie","Points","Goals_For","Goals_Against"],
+    post_headers=["Season","Games_Played","Win","Loose","Tie","Goals_For","Goals_Against"],
+    general=general,regular=regular_stats,post=post_stats)
 
