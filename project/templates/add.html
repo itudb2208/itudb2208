@@ -26,6 +26,7 @@
                         {% for div_id in div_codes %}
                             <option value="{{div_id}}">{{div_id}}</option>
                         {% endfor %}
+                        <option value="" selected></option>
                     </select>
 
                 {% elif attr == 'confID' %}
@@ -33,6 +34,7 @@
                         {% for conf_id in conf_codes %}
                             <option value="{{conf_id}}">{{conf_id}}</option>
                         {% endfor %}
+                        <option value="" selected></option>
                     </select>
 
                 {% elif type == 'TEXT' %}
