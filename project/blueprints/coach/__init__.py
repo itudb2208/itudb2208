@@ -19,8 +19,8 @@ def index(coachID):
         stats = cursor.fetchall()
         cursor.execute(f"""SELECT AwardsCoaches.year as Season,award as Award
         FROM Coaches JOIN AwardsCoaches ON (AwardsCoaches.year=Coaches.year)AND(AwardsCoaches.coachID=Coaches.coachID) WHERE (Coaches.coachID=?)""", (coachID,))
-        awardWinner = cursor.rowcount is not None
         awards = cursor.fetchall()
+        awardWinner = len(awards) > 0
     
     return render_template('coach.html',general_headers=[("firstName","firstName"),("lastName","lastName"),("nameNick","nameNick"),("birthYear","birthYear"),("birthMon","birthMon"),
     ("birthDay","birthDay"),("birthCountry","birthCountry"),("birthCity","birthCity"),("deathYear","deathYear"),("deathMon","deathMon"),("deathDay","deathDay"),("deathCountry","deathCountry"),("deathCity","deathCity")],

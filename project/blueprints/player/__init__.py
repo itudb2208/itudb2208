@@ -26,8 +26,8 @@ def index(playerID):
         stats = cursor.fetchall()
         cursor.execute(f"""SELECT AwardsPlayers.year as Season,award as Award
         FROM Scoring JOIN AwardsPlayers ON (AwardsPlayers.year=Scoring.year)AND(AwardsPlayers.playerID=Scoring.playerID) WHERE (Scoring.playerID=?)""", (playerID,))
-        awardWinner = cursor.rowcount is not None
         awards = cursor.fetchall()
+        awardWinner = len(awards) > 0
         
     
     return render_template('player.html',general_headers=[("firstName", "firstName"), ("lastName", "lastName"), ("nameNick", "nameNick"), ("HallOfFame_Year", "hofID"), ("Player_Weight", "height"), ("Player_Height", "weight"), ("firstNHL", "firstNHL"), ("lastNHL", "lastNHL"), ("Position", "pos"), ("birthYear", "birthYear"), ("birthMon", "birthMon"),
