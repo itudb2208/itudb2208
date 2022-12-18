@@ -7,7 +7,6 @@ function toggleEdit(callerNode) {
 	let mode = callerNode.getAttribute("mode");
 	let inputField = callerNode.previousElementSibling;
 	let rowNode = callerNode.parentElement.parentElement;
-	console.log(rowNode);
 	let rowIndex = rowNode.getAttribute("rowindex");
 	if(mode == "normal") {
 		callerNode.innerHTML = '<i class="bi bi-check-square-fill text-success"></i>';
@@ -17,9 +16,9 @@ function toggleEdit(callerNode) {
 		let tableName = rowNode.getAttribute("tablename");
 		if(modifications[tableName] == undefined) {
 			modifications[tableName] = {}
-			if(modifications[tableName][rowIndex] == undefined) {
+		}
+		if(modifications[tableName][rowIndex] == undefined) {
 				modifications[tableName][rowIndex] = {}
-			}
 		}
 		modifications[tableName][rowIndex][inputField.name] = inputField.value;
 		let whereKeys = rowNode.getAttribute("wherekeys");

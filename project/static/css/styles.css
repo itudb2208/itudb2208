@@ -1740,7 +1740,7 @@ span.flatpickr-weekday {
 .s002 form .inner-form .input-field.fifth-wrap .btn-search {
   height: 70px;
   width: 100%;
-  background: #b78a62;
+  background: #0d6efd;
   white-space: nowrap;
   border-radius: .5px;
   font-size: 20px;
@@ -1753,7 +1753,7 @@ span.flatpickr-weekday {
 }
 
 .s002 form .inner-form .input-field.fifth-wrap .btn-search:hover {
-  background: #af7d51;
+  background: #0a58ca;
 }
 
 @media screen and (max-width: 992px) {
