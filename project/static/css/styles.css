@@ -278,6 +278,10 @@ footer{
   margin-bottom: 65px;
 }
 
+.table>tbody {
+  vertical-align: middle!important;
+}
+
 /**
  * Remove the inner border and padding in Firefox.
  */
