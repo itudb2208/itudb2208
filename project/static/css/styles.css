@@ -14,6 +14,7 @@ html {
  */
 body {
   margin: 0;
+  background-color: aliceblue!important;
 }
 
 /**
@@ -303,6 +304,8 @@ td > p {
 .table-responsive {
   margin-top: 65px;
   margin-bottom: 65px;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .table>tbody {
@@ -1303,6 +1306,16 @@ span.flatpickr-weekday {
 
 .dayContainer + .dayContainer {
   box-shadow: -1px 0 0 #e6e6e6;
+}
+
+fieldset {
+  margin-left: 2%!important;
+  margin-right: 2%!important;
+}
+
+fieldset > input {
+  margin-right: 1%!important;
+  margin-bottom: 2%!important;
 }
 
 .flatpickr-day {
