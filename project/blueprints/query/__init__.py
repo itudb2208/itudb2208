@@ -9,6 +9,7 @@ TABLE_NAMES = {"Teams": "Teams", "Players": "Master", "Coaches": "Master"}
 TABLE_IDS = {"Teams": "tmID", "Players": "playerID", "Coaches": "coachID"}
 HEADERS_FOR_TABLES = {"Master": ["firstName", "lastName", "nameNick", "pos"],
                       "Teams": ["name"]}
+ROWS_PER_PAGE = 50
 
 bp = Blueprint('query', __name__, url_prefix='/')
 
@@ -17,6 +18,7 @@ def search():
     request.form = dict(request.form)  # Make the dict mutable
     
     search_mode = request.form.pop('search_mode')
+    page_no = int(request.form.pop('pageNo'))
     
     search_attributes = {key: ([value], key not in NON_EXACT_COLUMNS, True) for key, value in request.form.items() if value != ""}
     
@@ -38,9 +40,12 @@ def search():
             search_attributes["coachID"] = ([''], True, False)
     rows = db_filter(table_name, search_attributes, select_columns=HEADERS_FOR_TABLES[table_name], group_by_columns=group_by_columns)
     
+    page_count = ((len(rows)-1)//50)+1
+    rows = rows[(page_no-1)*50:page_no*50]
+    
     HEADERS_FOR_TABLES[table_name].pop()
 
-    return render_template('search_results.html', headers=HEADERS_FOR_TABLES[table_name], results=rows,table_id=table_id)
+    return render_template('search_results.html', headers=HEADERS_FOR_TABLES[table_name], results=rows,table_id=table_id, page_count=page_count, page_no=page_no, sent_form={**request.form, "search_mode": search_mode}, rows_per_page=ROWS_PER_PAGE)
     
 def db_filter(table_name, attributes, select_columns=["*"], group_by_columns=None):
     """
