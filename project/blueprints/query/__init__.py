@@ -29,6 +29,7 @@ def search():
            
     group_by_columns = None
     if table_name == "Teams":
+        search_attributes["tmID"] = ([''], True, False)
         group_by_columns = ["name"]
     else:
         if search_mode == "Players":
