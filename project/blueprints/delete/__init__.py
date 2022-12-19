@@ -12,8 +12,10 @@ def delete():
     ids = request.form.getlist('ids')
 
     which_table = request.form.pop('which_table')
+    if which_table == "tmID":
+        which_table = "name"
 
-    table_name = "Teams" if which_table == "tmID" else "Master"
+    table_name = "Teams" if which_table == "name" else "Master"
 
     statement = f"""DELETE FROM {table_name} WHERE"""
 
@@ -22,6 +24,8 @@ def delete():
     for id in ids:
         statement += f""" ({which_table} = "{id}") OR"""
     statement += f""" ({which_table} = "{last}")"""
+
+    print(statement)
     
     with get_db() as connection:
         cursor = connection.cursor()

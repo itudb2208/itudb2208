@@ -37,7 +37,7 @@
 				{% endfor %}
                 {% if current_user.is_authenticated %}
                 <td>
-                    <input type="checkbox" name="ids" value="{{ row[table_id] }}" />
+                    <input type="checkbox" name="ids" value="{{ row['name'] if table_id == 'tmID' else row[table_id] }}" />
                 </td>
                 {% endif %}
             </tr>
