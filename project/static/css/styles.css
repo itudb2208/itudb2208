@@ -270,6 +270,11 @@ footer{
   width: 100%;
 }
 
+.s002{
+  background-color: gray !important;
+  background-blend-mode: multiply  !important;
+}
+
 .s002 form .input-field {
   border-right: 0px!important;
 }
