@@ -1,7 +1,7 @@
 {% extends "_base.html" %}
 
 {% block content %}
-<div class="s002" style="background:url('{{url_for('static',filename='player.jpg')}}')">
+<div class="s002" style="background:url('{{url_for('static',filename='player.jpg')}}');background-size:cover;">
   <form action="{{ url_for('query.search') }}" method="POST">
   <input name="pageNo" type="hidden" value="1">
     <fieldset>
