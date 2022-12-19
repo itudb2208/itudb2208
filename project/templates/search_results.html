@@ -21,7 +21,7 @@
         <tbody>
             {% for row in results %}
             <tr>
-                <th scope="row">{{ loop.index }}</th>
+                <th scope="row">{{ rows_per_page * (page_no-1) + loop.index }}</th>
 				{% for header in headers %}
 					<td><a class="nav-link" href="/search/{{table_id}}/{{row[table_id]}}">{{ row[header] }}</a></td>
 				{% endfor %}
@@ -44,11 +44,44 @@
         Delete
     </button>
     {% endif %}
-</form>
+	</form>
+	<div class="d-flex justify-content-center">
+	<nav aria-label="Page navigation">
+  <ul class="pagination">
+	{% if page_no > 1 %}
+    <li class="page-item">
+      <a onclick="setPage(this)" class="page-link" href="#" aria-label="Previous" value="{{page_no-1}}">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+	{% endif %}
+	<form id="setpage_form" action="{{ url_for('query.search') }}" method="POST">
+		{% for key, value in sent_form.items() %}
+			<input type="hidden" name="{{key}}" value="{{value}}">
+		{% endfor %}
+		<input type="hidden" id="pageno_input" name="pageNo" value="{{page_no}}">
+	</form>
+	{% for i in range(page_no-3, page_no+4) %}
+		{% if i > 0 and i <= page_count %}
+			<li class="page-item"><a onclick="setPage(this)" class="page-link" href="#" value="{{i}}">{{i}}</a></li>
+		{% endif %}
+	{% endfor %}
+	
+	{% if page_no < page_count %}
+    <li class="page-item">
+      <a onclick="setPage(this)" class="page-link" href="#" aria-label="Next" value="{{page_no+1}}">
+        <span class="sr-only">Next</span>
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+	{% endif %}
+  </ul>
+	</nav>
+	</div>
 </div>
-<hr/>
-<hr/>
-<hr/>
-<hr/>
-<hr/>
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript" src="{{url_for('static',filename='js/search_results.js')}}"></script>
 {% endblock %}
