@@ -32,7 +32,11 @@ def delete():
         cursor.execute(statement)
         cursor.fetchall()
 
-    return redirect(url_for("home.index"))
+    if which_table == "name":
+        return redirect(url_for("teams.index"))
+    elif which_table == "playerID":
+        return redirect(url_for("players.index"))
+    return redirect(url_for("coaches.index"))
 
 @bp.route('/tmID/delete', methods=['POST'])
 def teams():
