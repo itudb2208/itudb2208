@@ -4,17 +4,25 @@
 
 <div style="padding:100px;">
 
-    <form method="post" id="tables" action="/add/select">
-        <p> <b>Please choose a table:</b></p>
-        <input type="radio" name="table_name" value="Teams">Teams</input><br>
-        <input type="radio" name="table_name" value="Master">Master</input><br> 
+    <form method="post" id="tableselect" action="/add/select">
+        <label for="tables" formid="tableselect"><b>Insert to:</b></label>
+        <select name="tables" id="tables">
+            {% if table_name == "Teams"%}
+            <option value="Teams" selected>Teams</option>
+            <option value="Master">Master</option>
+            {% elif table_name == "Master" %}
+            <option value="Teams">Teams</option>
+            <option value="Master" selected>Master</option>
+            {% else %}
+            <option value="Teams" >Teams</option>
+            <option value="Master">Master</option>
+            {% endif %}
 
+        </select>
         <button type="submit" class="btn btn-primary btn-sm"
               style="padding-left: 2.5rem; padding-right: 2.5rem;">Select</button>
     </form>
-    {% if table_name %}
-        <p><b>Selected table is:</b> {{table_name}}</p>
-    {% endif %}
+
     <div>
         {% if table_name == "Teams" or table_name == "Master" %}
         <form name="{{table_name}}" id="{{table_name}}" method="post" action="/add">
