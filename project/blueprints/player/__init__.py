@@ -9,7 +9,7 @@ bp = Blueprint('player', __name__, url_prefix='/search/playerID')
 def index(playerID):
     with get_db() as connection:
         cursor = connection.cursor()
-        cursor.execute(f"""SELECT firstName,lastName,nameNick,Master.hofID,HOF.year as HallOfFame_Year,height as Player_Weight,weight as Player_Height,firstNHL,lastNHL,pos as Position,birthYear,
+        cursor.execute(f"""SELECT firstName,lastName,nameNick,Master.hofID as hofID,HOF.year as HallOfFame_Year,height as Player_Weight,weight as Player_Height,firstNHL,lastNHL,pos as Position,birthYear,
         birthMon,birthDay,birthCountry,birthCity,deathYear,deathMon,deathDay,deathCountry,deathCity
         FROM Master LEFT JOIN HOF ON (Master.hofID = HOF.hofID) WHERE (playerID=?)""", (playerID,))
         general = cursor.fetchall()

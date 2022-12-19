@@ -24,7 +24,7 @@ def index(coachID):
     
     return render_template('coach.html',general_headers=[("firstName","firstName"),("lastName","lastName"),("nameNick","nameNick"),("birthYear","birthYear"),("birthMon","birthMon"),
     ("birthDay","birthDay"),("birthCountry","birthCountry"),("birthCity","birthCity"),("deathYear","deathYear"),("deathMon","deathMon"),("deathDay","deathDay"),("deathCountry","deathCountry"),("deathCity","deathCity")],
-    stats_headers=[("Season","Season"),("League","lgID"),("Team","tmID"),("Games","g"),("Win","w"),("Loose","l"),("Tie","t"),("Playoff_Games","postg"),("Playoff_Wins","postw"),("Playoff_Loose","postl"),("Playoff_Tie","postt")],
+    stats_headers=[("Season","Season"),("League","lgID"),("Team","tmID"),("Games","g"),("Win","w"),("Loose","l"),("Tie","t"),("Playoff_Games","postg"),("Playoff_Win","postw"),("Playoff_Loose","postl"),("Playoff_Tie","postt")],
     awards_headers=[("Season","year"),("Award","award")],general=general,stats=stats,awards=awards,awardWinner=awardWinner, coachID=coachID)
 
 
