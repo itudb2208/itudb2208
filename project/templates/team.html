@@ -2,7 +2,9 @@
 {% block content %}
 <p hidden id="entryID">{{ tmID }}</p>
 <div class="table-responsive">
+    <header>General Information About Team</header>
     <table class="table table-hover">
+        
         <thead class="thead-dark">
             <tr>
 				{% for display_header, real_header in general_headers %}
@@ -29,12 +31,13 @@
         </tbody>
     </table>
 </div>
-<hr/>
 <div class="table-responsive">
     {% if current_user.is_authenticated %}
     <form action="{{ url_for('delete.teams') }}" method="POST">
     {% endif %}
+    <header>Regular Season Statistics for Team</header>
     <table class="table table-hover">
+        
         <thead class="thead-dark">
             <tr>
 				<th>#</th>
@@ -85,12 +88,13 @@
 </form>
 {% endif %}
 </div>
-<hr/>
 <div class="table-responsive">
     {% if current_user.is_authenticated %}
     <form action="{{ url_for('delete.teams') }}" method="POST">
         {% endif %}
+        <header>Regular Season Statistics for Team</header>
     <table class="table table-hover">
+        
         <thead class="thead-dark">
             <tr>
 				<th>#</th>

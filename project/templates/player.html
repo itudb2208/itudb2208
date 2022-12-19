@@ -4,6 +4,7 @@
 <p hidden id="entryID">{{ playerID }}</p>
 <div class="table-responsive">
     <table class="table table-hover">
+        <caption>General Information for Player</caption>
         <thead class="thead-dark">
             <tr>
 				{% for display_header, real_header in general_headers %}
@@ -36,7 +37,9 @@
     {% if current_user.is_authenticated %}
     <form action="{{ url_for('delete.players') }}" method="POST">
     {% endif %}
+    <header>Stats for Goalie</header>
     <table class="table table-hover">
+        
         <thead class="thead-dark">
             <tr>
 				<th>#</th>
@@ -95,7 +98,9 @@
     {% if current_user.is_authenticated %}
     <form action="{{ url_for('delete.players') }}" method="POST">
         {% endif %}
+        <header>Stats for Player</header>
     <table class="table table-hover">
+        
         <thead class="thead-dark">
             <tr>
 				<th>#</th>
@@ -152,6 +157,7 @@
 {% endif %}
 {% if awardWinner %}
 <div class="table-responsive">
+    <header>Player Awards</header>
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>

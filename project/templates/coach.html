@@ -3,6 +3,7 @@
 {% block content %}
 <p hidden id="entryID">{{ coachID }}</p>
 <div class="table-responsive">
+    <header>General Information for Coach</header>
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
@@ -35,6 +36,7 @@
     {% if current_user.is_authenticated %}
     <form action="{{ url_for('delete.coaches') }}" method="POST">
         {% endif %}
+        <header>Stats for Coach</header>
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
@@ -91,6 +93,7 @@
 <hr/>
 {% if awardWinner %}
 <div class="table-responsive">
+    <header>Player Awards</header>
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>

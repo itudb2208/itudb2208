@@ -210,6 +210,17 @@ svg:not(:root) {
   overflow: hidden;
 }
 
+header {
+  font-size: xx-large;
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  text-align: center;
+  color: #000;
+  font-weight: bolder;
+  margin-bottom: 40px;
+}
+
 /* Forms
    ========================================================================== */
 /**
@@ -268,11 +279,21 @@ footer{
   position: fixed;
   bottom: 0;
   width: 100%;
+  padding-top: 1rem;
 }
 
 .s002{
   background-color: gray !important;
   background-blend-mode: multiply  !important;
+}
+
+td{
+  vertical-align: middle!important;
+}
+
+td > p {
+  margin-top: 0.5rem!important;
+  margin-bottom: 0.5rem!important;
 }
 
 .s002 form .input-field {
