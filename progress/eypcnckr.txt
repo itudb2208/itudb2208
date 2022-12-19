@@ -1,1 +1,6 @@
-[23/11/2022] I added navigation bar and footer components to ui design and adapted the bootstrap template to our hockey project like pages, background images ext. 
+[23/11/2022] I added navigation bar and footer components to ui design and adapted the bootstrap template to our hockey project like pages, background images ext.
+[14/12/2022] We refactored our database together and i am exclusively handled master and coaches tables.
+[16/12/2022] Create blueprints for each page and adjust routing for these pages.
+[17/12/2022] Adjust controllers and write SQL and update routings for individual pages.
+[18/12/2022] Create and adjust views for individual pages. Create delete controllers for main pages.
+[19/12/2022] Create delete controllers for individual pages and some stylistic development on user interface.
