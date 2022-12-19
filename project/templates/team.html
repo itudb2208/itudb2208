@@ -2,7 +2,7 @@
 {% block content %}
 <p hidden id="entryID">{{ tmID }}</p>
 <div class="table-responsive">
-    <table class="table table-sm table-borderless mb-0">
+    <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
 				{% for display_header, real_header in general_headers %}
@@ -31,14 +31,19 @@
 </div>
 <hr/>
 <div class="table-responsive">
+    {% if current_user.is_authenticated %}
     <form action="{{ url_for('delete.teams') }}" method="POST">
-    <table class="table table-sm table-borderless mb-0">
+    {% endif %}
+    <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
 				<th>#</th>
 				{% for display_header, real_header in regular_headers %}
 					<th>{{ display_header }}</th>
 				{% endfor %}
+                {% if current_user.is_authenticated %}
+                <th></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -58,13 +63,16 @@
 						{% endif %}
 					</td>
 				{% endfor %}
+                {% if current_user.is_authenticated %}
                 <td>
                     <input type="checkbox" name="years" value="{{ row['Season'] }}" />
                 </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% if current_user.is_authenticated %}
     <input id="search_mode_input" name="which_id" type="hidden" value="{{tmID}}">
     <input id="search_mode_input1" name="which_table" type="hidden" value="Teams">
     <button type="submit" class="btn btn-secondary" style="float: right;margin-right: 50px;margin-top: 15px;">
@@ -75,17 +83,23 @@
         Delete
     </button>
 </form>
+{% endif %}
 </div>
 <hr/>
 <div class="table-responsive">
+    {% if current_user.is_authenticated %}
     <form action="{{ url_for('delete.teams') }}" method="POST">
-    <table class="table table-sm table-borderless mb-0">
+        {% endif %}
+    <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
 				<th>#</th>
 				{% for display_header, real_header in post_headers %}
 					<th>{{ display_header }}</th>
 				{% endfor %}
+                {% if current_user.is_authenticated %}
+                <th></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -105,13 +119,16 @@
 						{% endif %}
 					</td>
 				{% endfor %}
+                {% if current_user.is_authenticated %}
                 <td>
                     <input type="checkbox" name="years" value="{{ row['Season'] }}" />
                 </td>
+                {% endif %}
             </tr>
             {% endfor %}
 		</tbody>
     </table>
+    {% if current_user.is_authenticated %}
     <input id="search_mode_input" name="which_id" type="hidden" value="{{tmID}}">
     <input id="search_mode_input1" name="which_table" type="hidden" value="TeamsPost">
     <button type="submit" class="btn btn-secondary" style="float: right;margin-right: 50px;margin-top: 15px;">
@@ -122,6 +139,7 @@
         Delete
     </button>
 </form>
+{% endif %}
 </div>
 
 {% if current_user.is_authenticated %}
