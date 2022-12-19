@@ -47,3 +47,4 @@ def update():
 
                 cursor.execute(f"""UPDATE {table_name} SET {','.join([f"{key}=?" for key in table_update.keys()])} WHERE coachID=? {where_clause}""", (*table_update.values(), coach_ID, *where_values))
     return index(coach_ID)
+    

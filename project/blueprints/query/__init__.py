@@ -76,3 +76,4 @@ def db_filter(table_name, attributes, select_columns=["*"], group_by_columns=Non
             statement += f" GROUP BY {','.join(group_by_columns)}"
         cursor.execute(statement, (*args,))
         return cursor.fetchall()
+        

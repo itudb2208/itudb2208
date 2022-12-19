@@ -131,6 +131,23 @@
 	</button>
 </div>
 {% endif %}
+<form action="{{ url_for('add.teampage_add') }}" method="POST">
+<fieldset>
+<legend>Add Post Season Entry:</legend>
+<input id="tmID_input" name="tmID" type="hidden" value="{{ tmID }}">
+<input id="table_input" name="table" type="hidden" value="TeamsPost">
+<input id="year_input" name="year" type="text" placeholder="Year">
+<input id="lgID_input" name="lgID" type="text" placeholder="League ID">
+<input id="g_input" name="G" type="numeric" placeholder="Games Played">
+<input id="w_input" name="W" type="numeric" placeholder="Games Won">
+<input id="l_input" name="L" type="numeric" placeholder="Games Lost">
+<input id="t_input" name="T" type="numeric" placeholder="Games Tied">
+<input id="gf_input" name="GF" type="numeric" placeholder="Goals For">
+<input id="ga_input" name="GA" type="numeric" placeholder="Goals Against">
+<input id="pim_input" name="PIM" type="numeric" placeholder="Penalty Infraction Minutes">
+<button type="submit" class="btn btn-primary">Submit</button>
+</fieldset>
+</form>
 <section class="w-100 p-4 pb-4 d-flex justify-content-center align-items-center flex-column">
     <div>
         <form class="d-flex" style="margin-bottom: 150px!important;"> 

@@ -122,10 +122,25 @@
 	</button>
 </div>
 {% endif %}
-<hr/>
-<hr/>
-<hr/>
-<hr/>
+<form action="{{ url_for('add.coachpage_add') }}" method="POST">
+<fieldset>
+<legend>Add Coach Entry:</legend>
+<input id="tmID_input" name="coachID" type="hidden" value="{{ coachID }}">
+<input id="table_input" name="table" type="hidden" value="Coaches">
+<input id="year_input" name="year" type="text" placeholder="Year">
+<input id="year_input" name="tmID" type="text" placeholder="Team ID">
+<input id="lgID_input" name="lgID" type="text" placeholder="League ID">
+<input id="g_input" name="g" type="numeric" placeholder="Games Played">
+<input id="w_input" name="w" type="numeric" placeholder="Games Won">
+<input id="l_input" name="l" type="numeric" placeholder="Games Lost">
+<input id="t_input" name="t" type="numeric" placeholder="Games Tied">
+<input id="gf_input" name="postg" type="numeric" placeholder="Post Games Played">
+<input id="ga_input" name="postw" type="numeric" placeholder="Post Games Won">
+<input id="pim_input" name="postl" type="numeric" placeholder="Post Games Lost">
+<input id="pim_input" name="postt" type="numeric" placeholder="Post Games Tied">
+<button type="submit" class="btn btn-primary">Submit</button>
+</fieldset>
+</form>
 {% endblock %}
 
 {% block scripts %}

@@ -15,22 +15,20 @@ def add():
         with get_db() as connection:
             cursor = connection.cursor()
             values = list()
-            table_name = data['table']
+            table_name = data.pop('table')
             types = dict([(row['name'],row['type']) for row in cursor.execute(f"PRAGMA table_info({table_name});").fetchall()])
             for k,v in data.items():
-                if k != 'table':
-                    if types[k] != "INTEGER":
-                        values.append(str(v))
-                    else:
-                        values.append(v)
+                if types[k] != "INTEGER":
+                    values.append(str(v))
+                else:
+                    values.append(v)
 
-            print(f"INSERT INTO Teams VALUES {values}")
             st_value = "("
             for i in range(len(values)-1):
                 st_value += "?,"
             st_value += "?)"
-            print(st_value)
-            row = cursor.execute(f"INSERT INTO {table_name} VALUES {st_value}",tuple(values))
+            print(f"INSERT INTO {table_name} ({','.join(data.keys())}) VALUES {st_value}",tuple(values))
+            row = cursor.execute(f"INSERT INTO {table_name} ({','.join(data.keys())}) VALUES {st_value}",tuple(values))
             if(row == None):
                 print("Failed.")
             else:
@@ -40,6 +38,21 @@ def add():
         return render_template('add.html')
 
     return render_template('add.html')
+
+@bp.route('/addTeamStat', methods=['GET','POST'])
+def teampage_add():
+    add()
+    return redirect(url_for(f"""team.index""",tmID=request.form['tmID']))
+    
+@bp.route('/addPlayerStat', methods=['GET','POST'])
+def playerpage_add():
+    add()
+    return redirect(url_for(f"""player.index""",playerID=request.form['playerID']))
+    
+@bp.route('/addCoachStat', methods=['GET','POST'])
+def coachpage_add():
+    add()
+    return redirect(url_for(f"""coach.index""",coachID=request.form['coachID']))
 
 
 @bp.route('/select', methods=["GET","POST"])
