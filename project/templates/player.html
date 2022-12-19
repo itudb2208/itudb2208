@@ -192,11 +192,40 @@
 		<i class="bi bi-check-square-fill"></i> Save
 	</button>
 </div>
+<form action="{{ url_for('add.playerpage_add') }}" method="POST">
+<fieldset>
+<legend>Add Scoring Entry:</legend>
+<input id="playerID_input" name="playerID" type="hidden" value="{{ playerID }}">
+<input id="table_input" name="table" type="hidden" value="Scoring">
+<input id="year_input" name="year" type="text" placeholder="Year">
+<input id="tmID_input" name="tmID" type="text" placeholder="Team ID">
+<input id="lgID_input" name="lgID" type="text" placeholder="League ID">
+<input id="lgID_input" name="pos" type="text" placeholder="Position">
+<input id="gp_input" name="GP" type="numeric" placeholder="Games Played">
+<input id="gp_input" name="G" type="numeric" placeholder="G">
+<input id="l_input" name="A" type="numeric" placeholder="A">
+<input id="t_input" name="Pts" type="numeric" placeholder="Points">
+<button type="submit" class="btn btn-primary">Submit</button>
+</fieldset>
+</form>
+<form action="{{ url_for('add.playerpage_add') }}" method="POST">
+<fieldset>
+<legend>Add Goalie Entry:</legend>
+<input id="playerID_input" name="playerID" type="hidden" value="{{ playerID }}">
+<input id="table_input" name="table" type="hidden" value="Goalies">
+<input id="year_input" name="year" type="text" placeholder="Year">
+<input id="tmID_input" name="tmID" type="text" placeholder="Team ID">
+<input id="lgID_input" name="lgID" type="text" placeholder="League ID">
+<input id="gp_input" name="GP" type="numeric" placeholder="Games Played">
+<input id="gp_input" name="W" type="numeric" placeholder="Games Won">
+<input id="l_input" name="L" type="numeric" placeholder="Games Lost">
+<input id="t_input" name="SHO" type="numeric" placeholder="SHO">
+<input id="gf_input" name="GA" type="numeric" placeholder="GA">
+<input id="ga_input" name="SA" type="numeric" placeholder="SA">
+<button type="submit" class="btn btn-primary">Submit</button>
+</fieldset>
+</form>
 {% endif %}
-<hr/>
-<hr/>
-<hr/>
-<hr/>
 {% endblock %}
 
 {% block scripts %}
