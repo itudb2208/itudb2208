@@ -130,7 +130,6 @@
 		<i class="bi bi-check-square-fill"></i> Save
 	</button>
 </div>
-{% endif %}
 <form action="{{ url_for('add.teampage_add') }}" method="POST">
 <fieldset>
 <legend>Add Post Season Entry:</legend>
@@ -148,6 +147,7 @@
 <button type="submit" class="btn btn-primary">Submit</button>
 </fieldset>
 </form>
+{% endif %}
 <section class="w-100 p-4 pb-4 d-flex justify-content-center align-items-center flex-column">
     <div>
         <form class="d-flex" style="margin-bottom: 150px!important;"> 
