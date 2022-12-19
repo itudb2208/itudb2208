@@ -85,4 +85,3 @@ def select():
         print(columns)
         print(reqs)
     return render_template('add.html',columns=columns, table_name=table_name, div_codes=div_codes,conf_codes=conf_codes, reqs=reqs)
-
